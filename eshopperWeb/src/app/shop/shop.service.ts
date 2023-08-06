@@ -26,11 +26,14 @@ export class ShopService {
     params = params.append('pageSize', shopParams.pageSize);
     if (shopParams.search) params = params.append('search', shopParams.search);
 
-    console.log(shopParams);
     return this.httpClient.get<Pagination<Product[]>>(
       this.baseUrl + 'products',
       { params: params }
     );
+  }
+
+  getProduct(id: number) {
+    return this.httpClient.get<Product>(this.baseUrl + 'products/' + id);
   }
 
   getBrands() {
