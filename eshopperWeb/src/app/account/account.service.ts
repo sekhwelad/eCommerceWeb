@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject, map, of } from 'rxjs';
 import { environment } from 'src/environments/environments';
-import { User } from '../shared/models/user';
+import { Address, User } from '../shared/models/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -70,5 +70,13 @@ export class AccountService {
     return this.httpClient.get<boolean>(
       this.baseUrl + 'account/emailExists?email=' + email
     );
+  }
+
+  getUserAddress() {
+    return this.httpClient.get<Address>(this.baseUrl + 'account/address');
+  }
+
+  updateUserAddress(address: Address) {
+    return this.httpClient.put(this.baseUrl + 'account/address', address);
   }
 }
